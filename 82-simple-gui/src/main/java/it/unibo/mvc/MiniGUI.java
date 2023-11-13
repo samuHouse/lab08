@@ -1,10 +1,13 @@
 package it.unibo.mvc;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Label;
+import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,10 +31,18 @@ public class MiniGUI {
      */
     public MiniGUI() {
         final JPanel canvas = new JPanel();
-        canvas.setLayout(new BorderLayout());
         final JButton write = new JButton("Print a random number on standard output");
-        canvas.add(write, BorderLayout.CENTER);
+        final JPanel inner = new JPanel();
+        final JPanel northP = new JPanel();
+        final TextField result = new TextField();
+        canvas.setLayout(new BorderLayout());
         frame.setContentPane(canvas);
+        northP.add(new Label("Result"));
+        northP.add(result);
+        inner.setLayout(new BoxLayout(inner, BoxLayout.X_AXIS));
+        frame.getContentPane().add(inner, BorderLayout.CENTER);
+        inner.add(write);
+        frame.getContentPane().add(northP, BorderLayout.NORTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
          * Handlers
@@ -39,7 +50,9 @@ public class MiniGUI {
         write.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                System.out.println(randomGenerator.nextInt());
+                Integer num = randomGenerator.nextInt();
+                System.out.println(num);
+                result.setText(num.toString());
             }
         });
     }

@@ -89,7 +89,7 @@ public interface DeathNote {
     void writeName(String name);
 
     /**
-     * If the cause of death is written within the next 40 milliseconds of writing the person's
+     * If the cause of death is written within the next 6 seconds and 40 milliseconds of writing the person's
      * name, it will happen.
      *
      * @param cause the cause of the human's death
